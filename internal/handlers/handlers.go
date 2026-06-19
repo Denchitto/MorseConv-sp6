@@ -10,7 +10,7 @@ import (
 
 func RootHandler(w http.ResponseWriter, _ *http.Request) {
 
-	data, err := os.ReadFile("../index.html")
+	data, err := os.ReadFile("index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -59,7 +59,7 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		fileNameExt = ".txt"
 	}
 	//Вместо String() использую Format(), так как двоеточия не воспринимаются
-	fileLocal, err := os.OpenFile("../"+time.Now().UTC().Format("2006-01-02 15-04-05")+fileNameExt, os.O_CREATE|os.O_WRONLY, 0755)
+	fileLocal, err := os.OpenFile(time.Now().UTC().Format("2006-01-02 15-04-05")+fileNameExt, os.O_CREATE|os.O_WRONLY, 0755)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
